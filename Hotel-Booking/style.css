@@ -1,0 +1,373 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #0f1a2c;
+  --secondary-color: #f6ac0f;
+  --text-dark: #0f172a;
+  --text-light: #64748b;
+  --extra-light: #f8fafc;
+  --white: #ffffff;
+  --max-width: 1200px;
+  --header-font: "Playfair Display", serif;
+}
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--extra-light);
+  color: var(--text-dark);
+  margin: 0;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary-color);
+  padding: 1rem 2rem;
+  color: var(--white);
+}
+
+nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Header */
+header {
+  padding: 5rem 1rem;
+  background: linear-gradient(rgba(15, 26, 44, 0.5), rgba(15, 26, 44, 0.5)), url("assets/about-bg.jpg") center/cover no-repeat;
+  color: var(--white);
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-family: var(--header-font);
+}
+
+/* Buttons */
+.btn,
+.btn-book {
+  display: inline-block;
+  background: var(--secondary-color);
+  color: var(--white);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn:hover,
+.btn-book:hover {
+  background-color: #d9960a;
+  transform: translateY(-2px);
+}
+
+/* Forms */
+form,
+.signup-form,
+.login-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: var(--white);
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+form label,
+.signup-form label,
+.login-form label,
+.booking-form label {
+  font-weight: bold;
+  display: block;
+  margin-top: 1rem;
+}
+
+form input,
+.signup-form input,
+.login-form input,
+.booking-form input,
+.booking-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--text-light);
+  border-radius: 5px;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  justify-items: center;
+}
+
+.menu-item {
+  background: var(--white);
+  padding: 1rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+}
+
+.menu-item img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item p {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Booking Layout */
+.booking-container {
+  max-width: 900px;
+  margin: 3rem auto;
+  display: flex;
+  gap: 2rem;
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.room-image {
+  flex: 1 1 300px;
+}
+
+.room-slider img {
+  width: 100%;
+  border-radius: 10px;
+  display: none;
+}
+
+.room-slider img.active {
+  display: block;
+}
+
+.booking-form {
+  flex: 1 1 300px;
+}
+
+.booking-form h2 {
+  font-family: var(--header-font);
+  margin-bottom: 1rem;
+}
+
+/* Message Feedback */
+.form-message,
+.message {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: crimson;
+}
+
+.form-message.success,
+.message.success {
+  color: green;
+}
+
+/* Sections */
+section {
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 2rem;
+  font-family: var(--header-font);
+  margin-bottom: 1rem;
+}
+
+/* Room & News Cards */
+.room,
+.news {
+  background: var(--white);
+  padding: 1rem;
+  margin: 1rem auto;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.room img,
+.news img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.room h3 {
+  color: var(--secondary-color);
+  margin-top: 1rem;
+}
+
+/* Footer */
+.footer-bar {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  text-align: center;        
+  width: 100%;               
+}
+
+.footer {
+  background: var(--primary-color);
+  color: var(--white);
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+  max-width: var(--max-width);
+  margin: auto;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-col h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-col ul li a {
+  color: var(--white);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-col ul li a:hover,
+.social-icons a:hover {
+  color: var(--secondary-color);
+}
+
+.footer-bar {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.admin-panel {
+  max-width: var(--max-width);
+  margin: 8rem auto;
+  padding: 2rem;
+  background-color: #f1f5f7 ;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.body {
+background-color:  #ffffff;
+}
+
+.h1 {
+  font-size: 3rem;
+  font-family: var(--header-font);
+  color: rgb(31, 41, 75);
+  margin-bottom: 1rem;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.admin-panel h3 {
+  font-family: var(--header-font);
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.admin-panel div {
+  background-color: #23395e; 
+  border: 1px solid var(--text-light);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.admin-panel button {
+  background-color: #dc3545;
+  color: var(--white);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.admin-panel button:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+.admin-panel p {
+  margin-top: 2rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .admin-panel div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-panel button {
+    margin-top: 1rem;
+  }
+}

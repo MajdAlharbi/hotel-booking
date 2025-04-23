@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Bookings</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #f8fafd;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #f1f5f9;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .booking-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e325c;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .booking-details {
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    .delete-btn {
+      background-color: #e11d48;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .delete-btn:hover {
+      background-color: #9f1239;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 style="text-align:center; margin-top: 2rem; color:#1e325c;">Admin Dashboard</h1>
+  <div class="container" id="bookings-container">
+    <p style="color:red;">Loading bookings...</p>
+  </div>
+
+  <script>
+    function loadBookings() {
+      fetch('get_bookings.php')
+        .then(res => res.json())
+        .then(bookings => {
+          const container = document.getElementById('bookings-container');
+          container.innerHTML = '';
+
+          if (bookings.length === 0) {
+            container.innerHTML = "<p style='text-align:center;'>No bookings found.</p>";
+            return;
+          }
+
+          bookings.forEach(b => {
+            const card = document.createElement('div');
+            card.className = 'booking-card';
+            card.innerHTML = `
+              <div class="booking-details">
+                <strong>Email:</strong> ${b.user_email}<br>
+                <strong>Room:</strong> ${b.room_id} |
+                <strong>Arrival:</strong> ${b.arrival_date} |
+                <strong>Departure:</strong> ${b.departure_date} |
+                <strong>Guests:</strong> ${b.guests}
+              </div>
+              <button class="delete-btn" onclick="deleteBooking(${b.id})">Delete</button>
+            `;
+            container.appendChild(card);
+          });
+        })
+        .catch(err => {
+          document.getElementById('bookings-container').innerHTML =
+            "<p style='color:red;'>❌ Failed to load bookings.</p>";
+        });
+    }
+
+    function deleteBooking(id) {
+      if (!confirm("Are you sure you want to delete this booking?")) return;
+
+      fetch("delete_booking.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "id=" + encodeURIComponent(id)
+      })
+        .then(res => res.text())
+        .then(msg => {
+          alert(msg);
+          loadBookings();
+        });
+    }
+
+    window.onload = loadBookings;
+  </script>
+</body>
+</html>

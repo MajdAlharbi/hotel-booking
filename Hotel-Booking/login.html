@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1 class="logo">Hotel Booking</h1>
+  </header>
+
+  <!-- Login Form -->
+  <main class="form-container">
+    <form id="login-form" class="signup-form">
+      <h2>Login to Your Account</h2>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit" class="btn">Log In</button>
+
+      <p id="message" class="message"></p>
+
+      <p class="login-link">
+        Don't have an account?
+        <a href="signup.html" class="signup-link">Sign Up</a>
+      </p>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bar">© 2025 Hotel Booking. All rights reserved.</div>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const message = document.getElementById("message");
+      const formData = new FormData(this);
+  
+      fetch("login.php", {
+        method: "POST",
+        body: formData
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          if (data.toLowerCase().includes("success")) {
+            if (data.includes("admin")) {
+              window.location.href = "adminLogin.html";  // ✅ admin goes here
+            } else {
+              window.location.href = "index.html";        // ✅ normal user
+            }
+          } else {
+            message.textContent = "❌ " + data;
+            message.classList.remove("success");
+            message.style.color = "red";
+          }
+        })
+        .catch((error) => {
+          message.textContent = "❌ Something went wrong.";
+          message.style.color = "red";
+          console.error(error);
+        });
+    });
+  </script>
+  
+
+</body>
+</html>

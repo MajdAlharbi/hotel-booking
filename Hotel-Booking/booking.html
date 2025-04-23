@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Your Stay</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">HOTEL</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="index.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Booking Container -->
+  <main class="booking-container">
+    <!-- Room Image -->
+    <div class="room-image">
+      <div class="room-slider">
+        <img class="slide active" src="assets/room-1.jpg" alt="Room 1" id="roomImage" />
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <form id="booking-form" class="booking-form">
+      <h2>Book Your Stay</h2>
+
+      <label for="arrival">Arrival Date</label>
+      <input type="date" id="arrival" name="arrival" required />
+
+      <label for="departure">Departure Date</label>
+      <input type="date" id="departure" name="departure" required />
+
+      <label for="guests">Guests</label>
+      <input type="number" id="guests" name="guests" min="1" required />
+
+      <label for="roomType">Choose Room Type:</label>
+      <select id="roomType" name="room_id" onchange="updatePrice()" required>
+        <option value="">-- Select Room --</option>
+        <option value="1">Deluxe Suite</option>
+        <option value="2">Family Suite</option>
+        <option value="3">Luxury Penthouse</option>
+      </select>
+
+      <p id="priceDisplay" class="form-message success">Price: $0 / night</p>
+
+      <button type="submit" class="btn-book">Confirm Booking</button>
+
+      <!-- 👇 Message will appear here -->
+      <p id="message" class="form-message"></p>
+    </form>
+  </main>
+
+  <!-- JavaScript -->
+  <script>
+    const priceMap = {
+      "1": 399,
+      "2": 599,
+      "3": 799,
+    };
+
+    function updatePrice() {
+      const selected = document.getElementById("roomType").value;
+      const price = priceMap[selected] || 0;
+      document.getElementById("priceDisplay").textContent = `Price: $${price} / night`;
+    }
+
+    window.onload = updatePrice;
+
+    document.getElementById("booking-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const message = document.getElementById("message");
+      message.textContent = "";
+      message.className = "form-message";
+
+      fetch("booking.php", {
+        method: "POST",
+        body: formData
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          if (data.includes("✅")) {
+            message.textContent = data;
+            message.classList.add("success");
+          } else {
+            message.textContent = data;
+            message.style.color = "crimson";
+          }
+        })
+        .catch((err) => {
+          message.textContent = "❌ Something went wrong.";
+          message.style.color = "crimson";
+        });
+    });
+  </script>
+
+</body>
+
+</html>

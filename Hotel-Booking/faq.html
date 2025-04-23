@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ - Hotel Booking</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #1e1e1e;
+    }
+
+    /* FAQ Page Only Enhancements */
+    section#faq {
+      padding: 50px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section#faq h1 {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  background: linear-gradient(to right, #1f1f3b, #1f1f45);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.subtitle {
+  text-align: center;
+  color: #888;
+  font-size: 16px;
+  margin-top: 20px; 
+  margin-bottom: 40px;
+  animation: fadeIn 1s ease-in;
+}
+
+/* Animation keyframes */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+    .faq-item {
+      background-color: #f8f8ff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+      margin-bottom: 15px;
+      padding: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      overflow: hidden;
+    }
+
+    .faq-item:hover {
+      background-color: #ececff;
+    }
+
+    .faq-item h2 {
+      margin: 0;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #2d2d2d;
+    }
+
+    .faq-item p {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.4s ease;
+      margin-top: 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .faq-item.active p {
+      max-height: 500px;
+      opacity: 1;
+      margin-top: 10px;
+    }
+
+    .arrow {
+      font-size: 16px;
+      transform: rotate(0deg);
+      transition: transform 0.3s ease, color 0.3s ease;
+      color: #706fd3;
+    }
+
+    .faq-item.active .arrow {
+      transform: rotate(90deg);
+      color: #3b3b98;
+    }
+  </style>
+</head>
+<body>
+
+
+  <nav>
+    <div class="logo">HOTEL </div>
+    <ul>
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="signup.html" class="active">Sign Up</a></li>
+	   <li><a href="login.html" class="active">Login</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+  </nav>
+
+  <!-- FAQ Section -->
+  <section id="faq">
+    <h1>Frequently Asked Questions</h1>
+    <p class="subtitle">All you need to know before booking with us</p>
+  
+
+    <div class="faq-item">
+      <h2>How can I book a room? <span class="arrow">&#9654;</span></h2>
+      <p>You can easily book a room by selecting your dates and number of guests in the booking form and clicking "Book Now".</p>
+    </div>
+    <div class="faq-item">
+      <h2>Can I cancel my booking? <span class="arrow">&#9654;</span></h2>
+      <p>Yes, you can cancel your reservation up to 24 hours before your arrival without any extra charges.</p>
+    </div>
+    <div class="faq-item">
+      <h2>Are there group discounts available? <span class="arrow">&#9654;</span></h2>
+      <p>Yes, we offer special discounts for large groups. Please contact us for more details.</p>
+    </div>
+    <div class="faq-item">
+      <h2>What are the check-in and check-out times? <span class="arrow">&#9654;</span></h2>
+      <p>Check-in starts at 2:00 PM and check-out is until 12:00 PM.</p>
+    </div>
+    <div class="faq-item">
+      <h2>Are pets allowed? <span class="arrow">&#9654;</span></h2>
+      <p>Sorry, pets are not allowed in the hotel.</p>
+    </div>
+  </section>
+
+  <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

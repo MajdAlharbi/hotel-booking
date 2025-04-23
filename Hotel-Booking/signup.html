@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">HOTEL</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="login.html" class="active">Login</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1 class="logo">Hotel Booking</h1>
+  </header>
+
+  <main class="form-container">
+    <form id="signup-form" class="signup-form">
+      <h2>Create an Account</h2>
+
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit" class="btn">Sign Up</button>
+
+      <p id="message" class="form-message"></p>
+
+      <p class="login-link">
+        Already have an account?
+        <a href="login.html" class="signup-link">Login</a>
+      </p>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-bar">© 2025 Hotel Booking. All rights reserved.</div>
+  </footer>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const message = document.getElementById('message');
+      const email = document.getElementById('email').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(email)) {
+        message.style.color = 'red';
+        message.textContent = '❌ Please enter a valid email address.';
+        return;
+      }
+
+      const formData = new FormData(this);
+
+      fetch('signup.php', {
+        method: 'POST',
+        body: formData
+      })
+        .then(res => res.text())
+        .then(data => {
+          if (data.toLowerCase().includes('success')) {
+            message.style.color = 'green';
+            message.textContent = '✅ ' + data;
+            setTimeout(() => {
+              window.location.href = 'index.html';
+            }, 1500);
+          } else {
+            message.style.color = 'red';
+            message.textContent = '❌ ' + data;
+          }
+        })
+        .catch(error => {
+          message.style.color = 'red';
+          message.textContent = '❌ Something went wrong.';
+          console.error(error);
+        });
+    });
+  </script>
+
+</body>
+
+</html>
